@@ -7,12 +7,14 @@
 	import { toast } from 'svelte-sonner';
 	import { env } from '$env/dynamic/public';
 	import { Turnstile } from 'svelte-turnstile';
+  import { LoaderCircle } from '@lucide/svelte';
 
 	let loading = $state(false);
 	let token = $state('');
 
 	function handleCaptcha(event: CustomEvent) {
 		token = event.detail.token;
+    handleLogin();
 		console.log('Captcha solved! ');
 	}
 
@@ -68,8 +70,18 @@
 			</h1>
 
 			<form class="space-y-4" on:submit|preventDefault={handleLogin}>
-				<Turnstile siteKey={env.PUBLIC_TURNSTILE_KEY} on:callback={handleCaptcha} />
-				<Button type="submit" onclick={handleLogin}>Play <Play /></Button>
+				<Turnstile siteKey={env.PUBLIC_TURNSTILE_KEY} on:callback={handleCaptcha}  />
+				<!--
+        <Button type="submit" onclick={handleLogin}>
+        
+          Play <Play />
+        </Button>
+
+        -->
+        <Button type="submit" class="w-32" disabled={loading}>
+        
+          <LoaderCircle class="animate-spin" />
+        </Button>
 			</form>
 
 			<div class="space-y-1">
