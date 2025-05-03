@@ -9,6 +9,7 @@
 	import { onMount, onDestroy } from 'svelte';
 	import type { AuthSession } from '@supabase/supabase-js';
 	import Button from './components/ui/button/button.svelte';
+  import { PlugZap } from '@lucide/svelte';
 
 	interface Props {}
 	let { session }: { session: AuthSession | null } = $props();
@@ -285,7 +286,7 @@
 </h1>
 
 <Button onclick={async () => await supabase.auth.signOut()} variant="outline" class="my-4"
-	>Quit</Button
+	>Reconnect <PlugZap /></Button
 >
 
 <style>
