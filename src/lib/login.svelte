@@ -5,7 +5,7 @@
 	import AuroraText from './AuroraText.svelte';
 	import { Play } from '@lucide/svelte';
 	import { toast } from 'svelte-sonner';
-	import { PUBLIC_TURNSTILE_KEY } from '$env/static/public';
+	import { env } from '$env/dynamic/public';
 	import { Turnstile } from 'svelte-turnstile';
 
 	let loading = $state(false);
@@ -68,7 +68,7 @@
 			</h1>
 
 			<form class="space-y-4" on:submit|preventDefault={handleLogin}>
-				<Turnstile siteKey={PUBLIC_TURNSTILE_KEY} on:callback={handleCaptcha} />
+				<Turnstile siteKey={env.PUBLIC_TURNSTILE_KEY} on:callback={handleCaptcha} />
 				<Button type="submit" onclick={handleLogin}>Play <Play /></Button>
 			</form>
 
